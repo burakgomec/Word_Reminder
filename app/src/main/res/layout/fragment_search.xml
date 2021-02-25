@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".SearchFragment"
+    android:orientation="vertical"
+    >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+            <Button
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/firstLanguage"
+                android:layout_alignParentStart="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#DA1212"
+                android:text="@string/turkish"
+                android:layout_margin="5dp"
+                android:textAllCaps="false"
+                android:textSize="12sp"/>
+
+            <ImageView
+                android:id="@+id/changeLanguage"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_change_24"
+                android:contentDescription="@string/changeLang"/>
+            <Button
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/secondLanguage"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#DA1212"
+                android:text="@string/english"
+                android:layout_margin="5dp"
+                android:textAllCaps="false"
+                android:textSize="12sp"/>
+
+        </RelativeLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp"
+        android:layout_margin="10dp">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="vertical"
+               android:weightSum="1">
+               <TextView
+                   android:id="@+id/textViewLang1"
+                   android:textSize="18sp"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="@string/turkish"
+                   android:fontFamily="sans-serif-black"
+                    android:padding="10dp"
+                   android:textColor="#DA1212"
+                   />
+
+               <EditText
+                   android:id="@+id/editTextSearch"
+                   android:layout_width="match_parent"
+                   android:layout_height="0dp"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginEnd="10dp"
+                   android:layout_weight="1"
+                   android:background="@null"
+                   android:ems="10"
+                   android:fontFamily="sans-serif-condensed-medium"
+                   android:gravity="top"
+                   android:hint="@string/enter_text"
+                   android:imeOptions="actionSearch"
+                   android:inputType="textMultiLine"
+                   android:scrollHorizontally="false"
+                   android:textSize="19sp" />
+
+
+           </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="0.5"
+    android:layout_margin="10dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/black">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textViewLang2"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/english"
+                android:fontFamily="sans-serif-black"
+                android:padding="10dp"
+                android:textColor="#DA1212"/>
+
+            <ImageView
+                android:id="@+id/imageViewStar"
+                android:layout_marginEnd="10dp"
+                android:padding="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_star_border_24"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_weight="1"
+            android:scrollbars="vertical"
+            android:layout_height="0dp"
+            android:id="@+id/textViewResult"
+            android:layout_width="match_parent"
+            android:textSize="19sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textIsSelectable="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            />
+
+
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
+
+
+</LinearLayout>

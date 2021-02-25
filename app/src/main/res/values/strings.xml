@@ -1,0 +1,128 @@
+<resources>
+    <string name="app_name">WordReminder</string>
+    <string name="title_home">Home</string>
+    <string name="word_reminder">Word Reminder</string>
+    <string name="english">İngilizce</string>
+    <string name="turkish">Türkçe</string>
+    <string name="search">Ara</string>
+    <string name="changeLang">changeLang</string>
+    <string name="enter_text">Metin girin</string>
+    <string name="settings">Ayarlar</string>
+    <string name="saved">Kaydedilenler</string>
+    <string name="menu_search">Arayın</string>
+    <string name="menu_saved">Kaydedilenler</string>
+    <string name="menu_settings">Ayarlar</string>
+
+    <array name="languagesCode">
+        <item>en</item>
+        <item>tr</item>
+        <item>hi</item>
+        <item>he</item>
+        <item>pt</item>
+        <item>zh-TW</item>
+        <item>hr</item>
+        <item>hu</item>
+        <item>cnr</item>
+        <item>id</item>
+        <item>it</item>
+        <item>zh</item>
+        <item>ja</item>
+        <item>nl</item>
+        <item>fi</item>
+        <item>fr</item>
+        <item>ga</item>
+        <item>gu</item>
+        <item>pl</item>
+        <item>da</item>
+        <item>de</item>
+        <item>lt</item>
+        <item>lv</item>
+        <item>uk</item>
+        <item>fr-CA</item>
+        <item>ur</item>
+        <item>ml</item>
+        <item>ms</item>
+        <item>mt</item>
+        <item>el</item>
+        <item>es</item>
+        <item>et</item>
+        <item>nb</item>
+        <item>vi</item>
+        <item>ne</item>
+        <item>ro</item>
+        <item>ru</item>
+        <item>bg</item>
+        <item>bn</item>
+        <item>bs</item>
+        <item>sk</item>
+        <item>sl</item>
+        <item>sr</item>
+        <item>ko</item>
+        <item>sv</item>
+        <item>ta</item>
+        <item>cs</item>
+        <item>te</item>
+        <item>th</item>
+        <item>cy</item>
+        <item>ca</item>
+        <item>eu</item>
+    </array>
+
+
+
+    <string-array name="languages">
+        <item>İngilizce</item>
+        <item>Türkçe</item>
+        <item>Hintçe</item>
+        <item>İbranice</item>
+        <item>Portekizce</item>
+        <item>Geleneksel Çince</item>
+        <item>Hırvatça</item>
+        <item>Macarca</item>
+        <item>Karadağca</item>
+        <item>Endonezya Dili</item>
+        <item>İtalyanca</item>
+        <item>Basitleştirilmiş Çince</item>
+        <item>Japonca</item>
+        <item>Felemenkçe</item>
+        <item>Fince</item>
+        <item>Fransızca</item>
+        <item>İrlandaca</item>
+        <item>Guceratça</item>
+        <item>Lehçe</item>
+        <item>Danca</item>
+        <item>Almanca</item>
+        <item>Litvanca</item>
+        <item>Letonca</item>
+        <item>Ukraynaca</item>
+        <item>Fransızca-Kanada</item>
+        <item>Urduca</item>
+        <item>Malayalamca</item>
+        <item>Malayca</item>
+        <item>Malta Dili</item>
+        <item>Yunanca</item>
+        <item>İspanyolca</item>
+        <item>Estonyaca</item>
+        <item>Norveççe</item>
+        <item>Vietnamca</item>
+        <item>Nepalce</item>
+        <item>Romence</item>
+        <item>Rusça</item>
+        <item>Bulgarca</item>
+        <item>Bengalce</item>
+        <item>Boşnakça</item>
+        <item>Slovakça</item>
+        <item>Slovence</item>
+        <item>Sırpça</item>
+        <item>Korece</item>
+        <item>İsveççe</item>
+        <item>Tamil</item>
+        <item>Çekçe</item>
+        <item>Telugu Dili</item>
+        <item>Tay Dili</item>
+        <item>Galce</item>
+        <item>Katalanca</item>
+        <item>Baskça</item>
+    </string-array>
+
+</resources>
