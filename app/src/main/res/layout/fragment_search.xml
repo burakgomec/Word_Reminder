@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".SearchFragment"
+    tools:context=".View.SearchFragment"
     android:orientation="vertical"
     >
 
@@ -23,7 +23,7 @@
                 android:text="@string/turkish"
                 android:layout_margin="5dp"
                 android:textAllCaps="false"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
 
             <ImageView
                 android:id="@+id/changeLanguage"
@@ -42,7 +42,7 @@
                 android:text="@string/english"
                 android:layout_margin="5dp"
                 android:textAllCaps="false"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
 
         </RelativeLayout>
 
@@ -59,18 +59,33 @@
                android:layout_height="match_parent"
                android:orientation="vertical"
                android:weightSum="1">
-               <TextView
-                   android:id="@+id/textViewLang1"
-                   android:textSize="18sp"
+               <RelativeLayout
                    android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:text="@string/turkish"
-                   android:fontFamily="sans-serif-black"
-                    android:padding="10dp"
-                   android:textColor="#DA1212"
-                   />
+                   android:layout_height="wrap_content">
+                   <TextView
+                       android:id="@+id/textViewLang1"
+                       android:textSize="18sp"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="@string/turkish"
+                       android:fontFamily="sans-serif-black"
+                       android:padding="10dp"
+                       android:textColor="#DA1212"
+                       />
+
+                   <ImageView
+                       android:id="@+id/clearEditText"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentEnd="true"
+                       android:padding="10dp"
+                       android:visibility="invisible"
+                       android:src="@drawable/ic_baseline_delete_24"/>
+               </RelativeLayout>
+
 
                <EditText
+                   android:textStyle="bold"
                    android:id="@+id/editTextSearch"
                    android:layout_width="match_parent"
                    android:layout_height="0dp"
@@ -79,9 +94,10 @@
                    android:layout_weight="1"
                    android:background="@null"
                    android:ems="10"
-                   android:fontFamily="sans-serif-condensed-medium"
+                   android:fontFamily="sans-serif-condensed"
                    android:gravity="top"
                    android:hint="@string/enter_text"
+                   android:textColor="@color/black"
                    android:imeOptions="actionSearch"
                    android:inputType="textMultiLine"
                    android:scrollHorizontally="false"
@@ -121,8 +137,7 @@
 
             <ImageView
                 android:id="@+id/imageViewStar"
-                android:layout_marginEnd="10dp"
-                android:padding="10dp"
+                android:padding="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_star_border_24"
@@ -132,13 +147,15 @@
 
 
         <TextView
+            android:textStyle="bold"
             android:layout_weight="1"
             android:scrollbars="vertical"
             android:layout_height="0dp"
             android:id="@+id/textViewResult"
             android:layout_width="match_parent"
             android:textSize="19sp"
-            android:fontFamily="sans-serif-condensed-medium"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-condensed"
             android:textIsSelectable="true"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"

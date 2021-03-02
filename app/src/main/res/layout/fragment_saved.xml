@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".SavedFragment"
-    android:background="#F4F4F4">
+    tools:context=".View.SavedFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSaved"

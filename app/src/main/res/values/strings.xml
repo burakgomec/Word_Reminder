@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WordReminder</string>
+    <string name="app_name">Word Reminder</string>
     <string name="title_home">Home</string>
     <string name="word_reminder">Word Reminder</string>
     <string name="english">İngilizce</string>
@@ -12,6 +12,19 @@
     <string name="menu_search">Arayın</string>
     <string name="menu_saved">Kaydedilenler</string>
     <string name="menu_settings">Ayarlar</string>
+    <string name="q_clear_saved_">Kayıt Edilen Çevirileri Temizle</string>
+    <string name="github_link">https://github.com/BurakGomec</string>
+    <string name="infoTextview">Bilgilendirme</string>
+    <string name="sqlite_toast">Kelime kayıt edilirken bir hata meydana geldi</string>
+
+    <string-array name="recyclerItems">
+        <item>Hakkında</item>
+        <item>Bildirim</item>
+        <item>Geri Bildirim</item>
+    </string-array>
+    
+    <string name="info">Bu uygulama açık kaynak kodlu olarak geliştirilmiştir.\n\nUygulamada IBM Language Translator servisinin ücretsiz planı kullanılmıştır. Bu yüzden çeviri hizmeti ayda toplam 1,000,000 karakter ve sunucuya atılan istek sayısına göre IBM tarafından sınırlandırılmıştır.\n\nAşağıda verilen link üzerinden uygulamanın tüm kaynak kodlarına ulaşabilirsiniz.\n\nUygulamaya Github ve Google Play üzerinden yıldız vererek destekleyebilir, öneriler sunabilirsiniz.\n\nGeliştirici: Burak GÖMEÇ
+    </string>
 
     <array name="languagesCode">
         <item>en</item>
@@ -69,7 +82,6 @@
     </array>
 
 
-
     <string-array name="languages">
         <item>İngilizce</item>
         <item>Türkçe</item>
@@ -124,5 +136,6 @@
         <item>Katalanca</item>
         <item>Baskça</item>
     </string-array>
+
 
 </resources>

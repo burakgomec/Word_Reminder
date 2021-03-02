@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.AboutFragment"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textViewInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/info"
+        android:textSize="16sp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/black"
+        android:padding="15dp"/>
+
+    <TextView
+        android:textColorLink="#DA1212"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:textSize="16sp"
+        android:padding="15dp"
+        android:text="@string/github_link"
+        />
+
+</LinearLayout>

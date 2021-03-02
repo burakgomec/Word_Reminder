@@ -7,19 +7,29 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.burakgomec.wordreminder.SearchFragment"
-        android:label="@string/title_home"
+        android:name="com.burakgomec.wordreminder.View.SearchFragment"
+        android:label="@string/word_reminder"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_saved"
-        android:name="com.burakgomec.wordreminder.SavedFragment"
+        android:name="com.burakgomec.wordreminder.View.SavedFragment"
         android:label="@string/saved"
         tools:layout="@layout/fragment_saved" />
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.burakgomec.wordreminder.SettingsFragment"
+        android:name="com.burakgomec.wordreminder.View.SettingsFragment"
         android:label="@string/settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_aboutFragment2"
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.burakgomec.wordreminder.View.AboutFragment"
+        android:label="Hakkında"
+        tools:layout="@layout/fragment_about" />
 </navigation>
