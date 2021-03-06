@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.burakgomec.wordreminder.Model.DatabaseController;
 import com.burakgomec.wordreminder.Model.Database;
 import com.burakgomec.wordreminder.R;
 import com.burakgomec.wordreminder.Model.TranslatedWord;
@@ -28,8 +29,7 @@ public class WordsRecyclerAdapter extends RecyclerView.Adapter<WordsRecyclerAdap
     public WordsRecyclerAdapter(Context context,Database database){
         this.context = context;
         this.database = database;
-        database.getWords();
-        this.translatedWordArrayList = database.translatedWordArrayList;
+        this.translatedWordArrayList = DatabaseController.getInstance().getTranslatedWordArrayList();
     }
 
     @NonNull

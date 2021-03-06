@@ -52,9 +52,8 @@ public class SettingsRecyclerAdapter extends RecyclerView.Adapter<SettingsRecycl
                         navDirections = SettingsFragmentDirections.actionNavigationSettingsToAboutFragment2();
                         Navigation.findNavController(holder.itemView).navigate(navDirections);
                         break;
-
                     case 1:
-                    //
+                        //
                         break;
                     case 2:
                         try {

@@ -23,8 +23,11 @@
         <item>Geri Bildirim</item>
     </string-array>
     
-    <string name="info">Bu uygulama açık kaynak kodlu olarak geliştirilmiştir.\n\nUygulamada IBM Language Translator servisinin ücretsiz planı kullanılmıştır. Bu yüzden çeviri hizmeti ayda toplam 1,000,000 karakter ve sunucuya atılan istek sayısına göre IBM tarafından sınırlandırılmıştır.\n\nAşağıda verilen link üzerinden uygulamanın tüm kaynak kodlarına ulaşabilirsiniz.\n\nUygulamaya Github ve Google Play üzerinden yıldız vererek destekleyebilir, öneriler sunabilirsiniz.\n\nGeliştirici: Burak GÖMEÇ
+    <string name="info">Bu uygulama açık kaynak kodlu olarak geliştirilmiştir.\n\nUygulamada IBM Language Translator servisinin ücretsiz planı kullanılmıştır. Bu yüzden çeviri hizmeti ayda toplam 1,000,000 karakter ve sunucuya atılan istek sayısına göre IBM tarafından sınırlandırılmıştır.\n\nAşağıda verilen link üzerinden uygulamanın tüm kaynak kodlarına ulaşabilirsiniz.\n\nUygulamaya Github ve Google Play üzerinden yıldız vererek destekleyebilir, öneriler sunabilirsiniz.\n\nIcons made by www.freepik.com"\n\nGeliştirici: Burak GÖMEÇ
     </string>
+    <string name="copied">Kopyalandı</string>
+    <string name="exit">Çıkış</string>
+    <string name="choose_a_language">Bir dil seçiniz</string>
 
     <array name="languagesCode">
         <item>en</item>

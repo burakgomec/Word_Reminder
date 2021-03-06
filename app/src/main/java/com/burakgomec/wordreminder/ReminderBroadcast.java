@@ -8,28 +8,40 @@ import android.graphics.Color;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.burakgomec.wordreminder.Model.Database;
+import com.burakgomec.wordreminder.Model.DatabaseController;
+
+import java.util.Random;
 
 public class ReminderBroadcast extends BroadcastReceiver {
-    Database database;
     String word1,word2;
+    Random random;
     @Override
     public void onReceive(Context context, Intent intent) {
-        database = new Database(context);
-        database.getWords();
-        word1 = database.translatedWordArrayList.get(database.translatedWordArrayList.size()-1).getFirstWord();
-        word2 = database.translatedWordArrayList.get(database.translatedWordArrayList.size()-1).getSecondWord();
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"notifyChannel")
-                .setSmallIcon(R.drawable.ic_baseline_star_rate_24)
-                .setSubText("Hatırlatıcı")
-                .setContentTitle("İşte son kayıt ettiğiniz kelime")
-                .setContentText(word1 + "  =  " + word2)
-                .setColor(Color.RED)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        try{
+            if(DatabaseController.getInstance().getTranslatedWordArrayList().size() >0){
+                random = new Random();
+                int randomIndex = random.nextInt(DatabaseController.getInstance().getTranslatedWordArrayList().size());
+                word1 = DatabaseController.getInstance().getTranslatedWordArrayList()
+                        .get(randomIndex).getFirstWord();
+                word2 = DatabaseController.getInstance().getTranslatedWordArrayList()
+                        .get(randomIndex).getSecondWord();
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"notifyChannel")
+                        .setSmallIcon(R.drawable.ic_baseline_star_rate_24)
+                        .setContentTitle("İşte son kayıt ettiğiniz kelimelerden birisi ")
+                        .setContentText(word1 + "  =  " + word2)
+                        .setColor(Color.RED)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-        NotificationManagerCompat notificationManagerCompat  = NotificationManagerCompat.from(context);
+                NotificationManagerCompat notificationManagerCompat  = NotificationManagerCompat.from(context);
 
-        notificationManagerCompat.notify(200,builder.build());
+                notificationManagerCompat.notify(200,builder.build());
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+
 
     }
 }
