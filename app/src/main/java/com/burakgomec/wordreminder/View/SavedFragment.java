@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.burakgomec.wordreminder.Model.Database;
 import com.burakgomec.wordreminder.Adapters.WordsRecyclerAdapter;
+import com.burakgomec.wordreminder.Model.DatabaseController;
 import com.burakgomec.wordreminder.databinding.FragmentSavedBinding;
 
 import org.jetbrains.annotations.NotNull;
@@ -31,8 +32,13 @@ public class SavedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         database = new Database(view.getContext());
-        WordsRecyclerAdapter wordsRecyclerAdapter = new WordsRecyclerAdapter(view.getContext(),database);
-        binding.recyclerViewSaved.setAdapter(wordsRecyclerAdapter);
+        if(DatabaseController.getInstance().getTranslatedWordArrayList().size() > 0){
+            binding.textViewNullList.setVisibility(View.INVISIBLE);
+            WordsRecyclerAdapter wordsRecyclerAdapter = new WordsRecyclerAdapter(view.getContext(),database,binding);
+            binding.recyclerViewSaved.setVisibility(View.VISIBLE);
+            binding.recyclerViewSaved.setAdapter(wordsRecyclerAdapter);
+        }
+
     }
 
 

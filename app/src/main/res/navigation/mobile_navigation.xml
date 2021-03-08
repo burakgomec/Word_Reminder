@@ -26,10 +26,19 @@
             android:id="@+id/action_navigation_settings_to_aboutFragment2"
             app:destination="@id/aboutFragment"
             app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_navigation_settings_to_notificationsFragment"
+            app:destination="@id/notificationsFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.burakgomec.wordreminder.View.AboutFragment"
         android:label="Hakkında"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.burakgomec.wordreminder.View.NotificationsFragment"
+        android:label="Bildirimler"
+        tools:layout="@layout/fragment_notifications" />
 </navigation>

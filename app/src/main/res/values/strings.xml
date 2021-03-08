@@ -12,26 +12,49 @@
     <string name="menu_search">Arayın</string>
     <string name="menu_saved">Kaydedilenler</string>
     <string name="menu_settings">Ayarlar</string>
-    <string name="q_clear_saved_">Kayıt Edilen Çevirileri Temizle</string>
-    <string name="github_link">https://github.com/BurakGomec</string>
-    <string name="infoTextview">Bilgilendirme</string>
+    <string name="github_link">https://github.com/BurakGomec/Word_Reminder</string>
+    <string name="infoTextView">Bilgilendirme</string>
     <string name="sqlite_toast">Kelime kayıt edilirken bir hata meydana geldi</string>
 
     <string-array name="recyclerItems">
         <item>Hakkında</item>
-        <item>Bildirim</item>
+        <item>Bildirimler</item>
         <item>Geri Bildirim</item>
     </string-array>
-    
+
     <string name="info">Bu uygulama açık kaynak kodlu olarak geliştirilmiştir.\n\nUygulamada IBM Language Translator servisinin ücretsiz planı kullanılmıştır. Bu yüzden çeviri hizmeti ayda toplam 1,000,000 karakter ve sunucuya atılan istek sayısına göre IBM tarafından sınırlandırılmıştır.\n\nAşağıda verilen link üzerinden uygulamanın tüm kaynak kodlarına ulaşabilirsiniz.\n\nUygulamaya Github ve Google Play üzerinden yıldız vererek destekleyebilir, öneriler sunabilirsiniz.\n\nIcons made by www.freepik.com"\n\nGeliştirici: Burak GÖMEÇ
     </string>
     <string name="copied">Kopyalandı</string>
     <string name="exit">Çıkış</string>
     <string name="choose_a_language">Bir dil seçiniz</string>
+    <string name="getNotification">Bildirim Al</string>
+    <string name="notificationInfoTextView">Uygulama varsayılan olarak her gün belirlenen saatte kayıt edilen çevirileri bildirim atmaktadır.\n\nBu saat dilimini değiştirebilir ve bildirimleri kapatabilirsiniz.</string>
+    <string name="changeTimeZone">Saat dilimini değiştir (Seçili saat: %1$s)</string>
+    <string name="buttonTimeZoneTitle">Bir saat seçiniz(Seçili Saat: %1$s)</string>
+    <string name="addStarToTranslation">Bir çeviriye yıldız ekleyin</string>
+    <string name="notificationText">\İşte son kayıt ettiğiniz çevirilerden birisi: </string>
+    <string name="checkYourInternetConnection">Lütfen internet bağlantınızı kontrol ediniz</string>
+    <string name="noResultsFound">Bir sonuç bulunamadı</string>
+    <string name="modelNotFound">Aradığınız 2 dil arasındaki model IBM servisinde bulunamadı</string>
+    <string name="generalException">Çeviri servisinde bir hata meydana geldi, lütfen daha sonra tekrar deneyiniz</string>
+    <string name="tooManyRequestException">Çeviri servisi yoğun istek sayısından dolayı anlık olarak yanıt vermiyor, lütfen daha sonra tekrar deneyiniz</string>
+    <string name="savedTimeZoneSuccessful">Saat diliminiz başarı ile kayıt edildi</string>
+    <string name="chooseTheLanguageToTranslate">Çevrilecek dili seçiniz</string>
+    <string name="enterWord">Bir kelime giriniz</string>
+    <string name="translateTo">Şu dile çevir:</string>
+    <string name="pleaseChangeYourNotificationSetting">Lütfen bildirim ayarınızı değiştiriniz</string>
+    <string name="cancel">İptal</string>
+    <string name="okey">Tamam</string>
+    <string name="clearSavedTranslations">Kaydedilen Çevirileri Temizle</string>
+    <string name="clearSavedTranslationsMessage">Bu uygulamadaki tüm çeviri kayıtları temizlenecek</string>
+
 
     <array name="languagesCode">
         <item>en</item>
         <item>tr</item>
+        <item>de</item>
+        <item>fr</item>
+        <item>fr-CA</item>
         <item>hi</item>
         <item>he</item>
         <item>pt</item>
@@ -45,16 +68,13 @@
         <item>ja</item>
         <item>nl</item>
         <item>fi</item>
-        <item>fr</item>
         <item>ga</item>
         <item>gu</item>
         <item>pl</item>
         <item>da</item>
-        <item>de</item>
         <item>lt</item>
         <item>lv</item>
         <item>uk</item>
-        <item>fr-CA</item>
         <item>ur</item>
         <item>ml</item>
         <item>ms</item>
@@ -88,6 +108,9 @@
     <string-array name="languages">
         <item>İngilizce</item>
         <item>Türkçe</item>
+        <item>Almanca</item>
+        <item>Fransızca</item>
+        <item>Fransızca-Kanada</item>
         <item>Hintçe</item>
         <item>İbranice</item>
         <item>Portekizce</item>
@@ -101,16 +124,13 @@
         <item>Japonca</item>
         <item>Felemenkçe</item>
         <item>Fince</item>
-        <item>Fransızca</item>
         <item>İrlandaca</item>
         <item>Guceratça</item>
         <item>Lehçe</item>
         <item>Danca</item>
-        <item>Almanca</item>
         <item>Litvanca</item>
         <item>Letonca</item>
         <item>Ukraynaca</item>
-        <item>Fransızca-Kanada</item>
         <item>Urduca</item>
         <item>Malayalamca</item>
         <item>Malayca</item>
@@ -139,6 +159,40 @@
         <item>Katalanca</item>
         <item>Baskça</item>
     </string-array>
+
+
+    <string-array name="hours">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+    </string-array>
+
+
+    <style name="BrandedSwitch.control" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">#DA1212</item>
+        <item name="colorSwitchThumbNormal">#704C4C</item>
+    </style>
 
 
 </resources>

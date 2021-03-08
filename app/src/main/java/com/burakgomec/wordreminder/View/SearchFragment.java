@@ -46,8 +46,8 @@ public class SearchFragment extends Fragment {
     Integer index;
     Database database;
     SharedPreferences sharedPreferences;
-    ClipboardManager clipboardManager; ClipData clipData;
-
+    ClipboardManager clipboardManager;
+    ClipData clipData;
 
 
     @Override
@@ -128,11 +128,10 @@ public class SearchFragment extends Fragment {
             }
         }
         else if(binding.secondLanguageButton.getText().equals(getString(R.string.choose_a_language))){
-            Toast.makeText(getContext(),"Çevirilecek dili seçiniz", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.chooseTheLanguageToTranslate, Toast.LENGTH_SHORT).show();
         }
-
         else{
-            Toast.makeText(getContext(),"Bir kelime giriniz", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.enterWord, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -150,7 +149,6 @@ public class SearchFragment extends Fragment {
             langCode = langCode2;
             langCode2 = language1TextBuffer;
 
-
             editString = binding.textViewResult.getText().toString();
             if(!editString.equals("")){
                 Connection.getInstance().getWord(editString,langCode,langCode2,getActivity(), binding.textViewResult);
@@ -166,7 +164,7 @@ public class SearchFragment extends Fragment {
         if(!binding.textViewResult.getText().toString().equals("")){
             if(imageControl){
                 binding.imageViewStar.setImageResource(R.drawable.ic_baseline_star_rate_24);
-                database.saveWords(binding.editTextSearch.getText().toString(),binding.textViewResult.getText().toString());//insert db
+                database.saveWords(binding.editTextSearch.getText().toString(),binding.textViewResult.getText().toString());
                 imageControl = false;
             }
             else{
@@ -187,14 +185,12 @@ public class SearchFragment extends Fragment {
                 binding.clearEditText.setVisibility(View.INVISIBLE);
             }
         });
-
         binding.clearEditText.setOnClickListener(v -> binding.editTextSearch.setText(""));
     }
 
 
 
     private void setLanguageClickListeners(){
-
         binding.secondLanguageButton.setOnClickListener(v -> {
                 alertDialogLanguage.clear();
                 if(bufferArrayLanguage2.size() == 1){
@@ -208,24 +204,18 @@ public class SearchFragment extends Fragment {
                     }
             }
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-            builder.setTitle("Şu dile çevir:");
-            builder.setItems(alertDialogLanguage.toArray(new String[0]), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    binding.secondLanguageButton.setText(alertDialogLanguage.get(which));
-                    binding.textViewLang2.setText(alertDialogLanguage.get(which));
-                    index = Connection.getInstance().languages.indexOf(alertDialogLanguage.get(which));
-                    langCode2 = Connection.getInstance().languagesCode.get(index);
-                    editString = binding.editTextSearch.getText().toString();
-                    if(!editString.equals("")){
-                        Connection.getInstance().getWord(editString,langCode,langCode2,getActivity(), binding.textViewResult);
-                    }
+            builder.setTitle(R.string.translateTo);
+            builder.setItems(alertDialogLanguage.toArray(new String[0]), (dialog, which) -> {
+                binding.secondLanguageButton.setText(alertDialogLanguage.get(which));
+                binding.textViewLang2.setText(alertDialogLanguage.get(which));
+                index = Connection.getInstance().languages.indexOf(alertDialogLanguage.get(which));
+                langCode2 = Connection.getInstance().languagesCode.get(index);
+                editString = binding.editTextSearch.getText().toString();
+                if(!editString.equals("")){
+                    Connection.getInstance().getWord(editString,langCode,langCode2,getActivity(), binding.textViewResult);
                 }
             });
-            builder.setNegativeButton(getString(R.string.exit), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) { dialog.dismiss(); }
-            });
+            builder.setNegativeButton(getString(R.string.exit), (dialog, which) -> dialog.dismiss());
             AlertDialog alert = builder.create();
             alert.show();
         });
@@ -234,20 +224,14 @@ public class SearchFragment extends Fragment {
         binding.firstLanguageButton.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
             builder.setTitle(getString(R.string.choose_a_language));
-            builder.setItems(R.array.languages, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    binding.firstLanguageButton.setText(Connection.getInstance().languages.get(which));
-                    binding.textViewLang1.setText(Connection.getInstance().languages.get(which));
-                    binding.secondLanguageButton.setText(getString(R.string.choose_a_language));
-                    langCode = Connection.getInstance().languagesCode.get(which);
-                    setLanguageButton2();
-                }
+            builder.setItems(R.array.languages, (dialog, which) -> {
+                binding.firstLanguageButton.setText(Connection.getInstance().languages.get(which));
+                binding.textViewLang1.setText(Connection.getInstance().languages.get(which));
+                binding.secondLanguageButton.setText(getString(R.string.choose_a_language));
+                langCode = Connection.getInstance().languagesCode.get(which);
+                setLanguageButton2();
             });
-            builder.setNegativeButton(R.string.exit, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) { dialog.dismiss(); }
-            });
+            builder.setNegativeButton(R.string.exit, (dialog, which) -> dialog.dismiss());
             AlertDialog alert = builder.create();
             alert.show();
         });
@@ -281,8 +265,8 @@ public class SearchFragment extends Fragment {
             editor.putString("Language2",getString(R.string.english));
         }
         editor.apply();
-
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

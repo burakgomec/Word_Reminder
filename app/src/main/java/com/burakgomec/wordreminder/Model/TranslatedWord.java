@@ -3,8 +3,8 @@ package com.burakgomec.wordreminder.Model;
 public class TranslatedWord {
 
     private int id;
-    private String firstWord;
-    private String secondWord;
+    private final String firstWord;
+    private final String secondWord;
 
     public TranslatedWord(int id, String firstWord, String secondWord) {
         this.id = id;
@@ -14,14 +14,6 @@ public class TranslatedWord {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setFirstWord(String firstWord) {
-        this.firstWord = firstWord;
-    }
-
-    public void setSecondWord(String secondWord) {
-        this.secondWord = secondWord;
     }
 
     public int getId() {

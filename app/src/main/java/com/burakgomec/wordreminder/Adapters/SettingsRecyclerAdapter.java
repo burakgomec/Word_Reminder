@@ -44,25 +44,23 @@ public class SettingsRecyclerAdapter extends RecyclerView.Adapter<SettingsRecycl
     @Override
     public void onBindViewHolder(@NonNull SettingsRecyclerAdapter.ViewHolder holder, int position) {
         holder.textViewSetting.setText(settings.get(position));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (position){
-                    case 0:
-                        navDirections = SettingsFragmentDirections.actionNavigationSettingsToAboutFragment2();
-                        Navigation.findNavController(holder.itemView).navigate(navDirections);
-                        break;
-                    case 1:
-                        //
-                        break;
-                    case 2:
-                        try {
-                           context.startActivity((new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName))));
-                        } catch (android.content.ActivityNotFoundException error) {
-                            context.startActivity((new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName))));
-                        }
-                        break;
-                }
+        holder.itemView.setOnClickListener(v -> {
+            switch (position){
+                case 0:
+                    navDirections = SettingsFragmentDirections.actionNavigationSettingsToAboutFragment2();
+                    Navigation.findNavController(holder.itemView).navigate(navDirections);
+                    break;
+                case 1:
+                    navDirections = SettingsFragmentDirections.actionNavigationSettingsToNotificationsFragment();
+                    Navigation.findNavController(holder.itemView).navigate(navDirections);
+                    break;
+                case 2:
+                    try {
+                       context.startActivity((new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName))));
+                    } catch (android.content.ActivityNotFoundException error) {
+                        context.startActivity((new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName))));
+                    }
+                    break;
             }
         });
     }

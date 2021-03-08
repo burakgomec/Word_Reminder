@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".View.SettingsFragment"
+    android:background="#F4F4F4"
    >
 
     <TextView
@@ -18,7 +19,7 @@
         android:layout_marginEnd="5dp"
         android:textSize="15sp"
         android:fontFamily="sans-serif-medium"
-        android:text="@string/infoTextview"/>
+        android:text="@string/infoTextView"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -36,7 +37,7 @@
         android:id="@+id/buttonClearSavedWords"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/q_clear_saved_"
+        android:text="@string/clearSavedTranslations"
         android:layout_margin="10dp"
         android:textColor="@color/white"
         android:layout_alignParentBottom="true"

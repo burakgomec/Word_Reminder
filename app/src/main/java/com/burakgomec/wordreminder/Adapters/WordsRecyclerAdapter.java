@@ -16,6 +16,7 @@ import com.burakgomec.wordreminder.Model.DatabaseController;
 import com.burakgomec.wordreminder.Model.Database;
 import com.burakgomec.wordreminder.R;
 import com.burakgomec.wordreminder.Model.TranslatedWord;
+import com.burakgomec.wordreminder.databinding.FragmentSavedBinding;
 
 import java.util.ArrayList;
 
@@ -25,11 +26,13 @@ public class WordsRecyclerAdapter extends RecyclerView.Adapter<WordsRecyclerAdap
     Context context;
     ArrayList<TranslatedWord> translatedWordArrayList;
     Database database;
+    FragmentSavedBinding binding;
 
-    public WordsRecyclerAdapter(Context context,Database database){
+    public WordsRecyclerAdapter(Context context, Database database, FragmentSavedBinding binding){
         this.context = context;
         this.database = database;
         this.translatedWordArrayList = DatabaseController.getInstance().getTranslatedWordArrayList();
+        this.binding = binding;
     }
 
     @NonNull
@@ -39,22 +42,20 @@ public class WordsRecyclerAdapter extends RecyclerView.Adapter<WordsRecyclerAdap
         return new ViewHolder(view);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.word1.setText(translatedWordArrayList.get(position).getFirstWord());
         holder.word2.setText(translatedWordArrayList.get(position).getSecondWord());
 
-        holder.imageViewUnStar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                database.deleteWordWithId(translatedWordArrayList.get(position));
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, getItemCount() - position);
+        holder.imageViewUnStar.setOnClickListener(v -> {
+            database.deleteWordWithId(translatedWordArrayList.get(position));
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, getItemCount() - position);
+            if(translatedWordArrayList.size() == 0){
+                binding.recyclerViewSaved.setVisibility(View.INVISIBLE);
+                binding.textViewNullList.setVisibility(View.VISIBLE);
             }
         });
-
-
     }
 
 

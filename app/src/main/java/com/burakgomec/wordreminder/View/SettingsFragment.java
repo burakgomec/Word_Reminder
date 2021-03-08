@@ -48,7 +48,6 @@ public class SettingsFragment extends Fragment {
         binding.recyclerViewSettings.setAdapter(settingsRecyclerAdapter);
         database = new Database(view.getContext());
 
-
         binding.buttonClearSavedWords.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,16 +60,16 @@ public class SettingsFragment extends Fragment {
 
     private void clearSavedWords(View view){
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-        builder.setTitle("Kayıt edilen çevirileri temizle");
-        builder.setMessage("Bu uygulamadaki tüm çeviri kayıtları temizlenecek");
-        builder.setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.clearSavedTranslations);
+        builder.setMessage(R.string.clearSavedTranslationsMessage);
+        builder.setPositiveButton(R.string.okey, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 database.deleteAllWords();
                 database.close();
             }
         });
-        builder.setNegativeButton("İptal", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
