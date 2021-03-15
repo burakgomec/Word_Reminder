@@ -14,25 +14,20 @@
     <string name="menu_settings">Ayarlar</string>
     <string name="github_link">https://github.com/BurakGomec/Word_Reminder</string>
     <string name="infoTextView">Bilgilendirme</string>
-    <string name="sqlite_toast">Kelime kayıt edilirken bir hata meydana geldi</string>
-
-    <string-array name="recyclerItems">
-        <item>Hakkında</item>
-        <item>Bildirimler</item>
-        <item>Geri Bildirim</item>
-    </string-array>
-
+    <string name="sqlToastMessage">Kelime kayıt edilirken bir hata meydana geldi</string>
     <string name="info">Bu uygulama açık kaynak kodlu olarak geliştirilmiştir.\n\nUygulamada IBM Language Translator servisinin ücretsiz planı kullanılmıştır. Bu yüzden çeviri hizmeti ayda toplam 1,000,000 karakter ve sunucuya atılan istek sayısına göre IBM tarafından sınırlandırılmıştır.\n\nAşağıda verilen link üzerinden uygulamanın tüm kaynak kodlarına ulaşabilirsiniz.\n\nUygulamaya Github ve Google Play üzerinden yıldız vererek destekleyebilir, öneriler sunabilirsiniz.\n\nIcons made by www.freepik.com"\n\nGeliştirici: Burak GÖMEÇ
     </string>
     <string name="copied">Kopyalandı</string>
     <string name="exit">Çıkış</string>
     <string name="choose_a_language">Bir dil seçiniz</string>
     <string name="getNotification">Bildirim Al</string>
-    <string name="notificationInfoTextView">Uygulama varsayılan olarak her gün belirlenen saatte kayıt edilen çevirileri bildirim atmaktadır.\n\nBu saat dilimini değiştirebilir ve bildirimleri kapatabilirsiniz.</string>
+    <string name="notificationInfoTextView">Uygulama her gün belirlenen saatte kaydedilen çevirileri bildirim atmaktadır.\n\nBu saat dilimini değiştirebilir ve bildirimleri kapatabilirsiniz.</string>
     <string name="changeTimeZone">Saat dilimini değiştir (Seçili saat: %1$s)</string>
     <string name="buttonTimeZoneTitle">Bir saat seçiniz(Seçili Saat: %1$s)</string>
     <string name="addStarToTranslation">Bir çeviriye yıldız ekleyin</string>
-    <string name="notificationText">\İşte son kayıt ettiğiniz çevirilerden birisi: </string>
+    <string name="notificationText">İşte son kayıt ettiğiniz çevirilerden birisi </string>
+
+
     <string name="checkYourInternetConnection">Lütfen internet bağlantınızı kontrol ediniz</string>
     <string name="noResultsFound">Bir sonuç bulunamadı</string>
     <string name="modelNotFound">Aradığınız 2 dil arasındaki model IBM servisinde bulunamadı</string>
@@ -44,12 +39,30 @@
     <string name="translateTo">Şu dile çevir:</string>
     <string name="pleaseChangeYourNotificationSetting">Lütfen bildirim ayarınızı değiştiriniz</string>
     <string name="cancel">İptal</string>
-    <string name="okey">Tamam</string>
+    <string name="ok">Tamam</string>
     <string name="clearSavedTranslations">Kaydedilen Çevirileri Temizle</string>
     <string name="clearSavedTranslationsMessage">Bu uygulamadaki tüm çeviri kayıtları temizlenecek</string>
+    <string name="clearEditText">clearEditText</string>
+    <string name="removeStar">removeStar</string>
+    <string name="addStar">addStar</string>
+    <string name="noClassException">Android sürüm farklılığından dolayı hata meydana geldi, lütfen bunu geliştiriciye bildiriniz</string>
+    <string name="permissionY">İzin Ver</string>
+    <string name="permissionN">Reddet</string>
+    <string name="permissionTitle">\'Word Reminder\' Size Bildirim Göndermek İstiyor</string>
+    <string name="changePermissionInfo">Bildirim tercihlerinizi ayarlardan değiştirebilirsiniz</string>
 
+    <string-array name="recyclerItems">
+        <item>Hakkında</item>
+        <item>Bildirimler</item>
+        <item>Geri Bildirim</item>
+    </string-array>
 
-    <array name="languagesCode">
+    <string-array name="pushMessages">
+        <item>Hemen bir çeviriye yıldız ekleyin</item>
+        <item>Son aradığınız çevirileri kayıt edin</item>
+    </string-array>
+
+    <string-array name="languagesCode">
         <item>en</item>
         <item>tr</item>
         <item>de</item>
@@ -102,7 +115,7 @@
         <item>cy</item>
         <item>ca</item>
         <item>eu</item>
-    </array>
+    </string-array>
 
 
     <string-array name="languages">

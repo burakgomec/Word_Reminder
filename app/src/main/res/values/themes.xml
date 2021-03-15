@@ -11,13 +11,10 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-
     </style>
 
     <style name="Launcher" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:statusBarColor" tools:targetApi="l">#DA1212</item>
-        <!-- Customize your theme here. -->
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 

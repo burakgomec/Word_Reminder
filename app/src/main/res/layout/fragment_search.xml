@@ -81,7 +81,8 @@
                        android:layout_alignParentEnd="true"
                        android:padding="10dp"
                        android:visibility="invisible"
-                       android:src="@drawable/ic_baseline_delete_24"/>
+                       android:src="@drawable/ic_baseline_delete_24"
+                       android:contentDescription="@string/clearEditText" />
                </RelativeLayout>
 
 
@@ -102,7 +103,8 @@
                    android:imeOptions="actionSearch"
                    android:inputType="textMultiLine"
                    android:scrollHorizontally="false"
-                   android:textSize="19sp" />
+                   android:textSize="19sp"
+                   android:importantForAutofill="no" />
 
 
            </LinearLayout>
@@ -134,7 +136,8 @@
                 android:text="@string/english"
                 android:fontFamily="sans-serif-black"
                 android:padding="10dp"
-                android:textColor="#DA1212"/>
+                android:textColor="#DA1212"
+                tools:ignore="RelativeOverlap" />
 
             <ImageView
                 android:id="@+id/imageViewStar"
@@ -142,7 +145,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_star_border_24"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/addStar" />
 
         </RelativeLayout>
 
@@ -161,13 +165,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             />
-
-
-
     </LinearLayout>
 
 
 </com.google.android.material.card.MaterialCardView>
-
-
 </LinearLayout>

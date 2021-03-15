@@ -1,10 +1,12 @@
 package com.burakgomec.wordreminder;
 
+import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.burakgomec.wordreminder.Model.Database;
 import com.burakgomec.wordreminder.PushNotifications.AlarmController;
@@ -48,16 +50,33 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("notification",MODE_PRIVATE);
         if(sharedPreferences.getBoolean("onCreateKey",true)){
-            AlarmController.getInstance().setAlarm(getApplicationContext());
-            ComponentName receiver = new ComponentName(this, RebootReceiver.class);
-            PackageManager pm = this.getPackageManager();
-            pm.setComponentEnabledSetting(receiver,
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                    PackageManager.DONT_KILL_APP);
+            checkPushNotificationPermission();
+        }
+    }
+
+
+
+
+    private void checkPushNotificationPermission(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.permissionTitle);
+            builder.setPositiveButton(R.string.permissionY, (dialog, which) -> {
+                AlarmController.getInstance().setAlarm(getApplicationContext());
+                ComponentName receiver = new ComponentName(getApplicationContext(), RebootReceiver.class);
+                PackageManager pm = getPackageManager();
+                pm.setComponentEnabledSetting(receiver,
+                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                        PackageManager.DONT_KILL_APP);
+            });
+            builder.setNegativeButton(R.string.permissionN, (dialog, which) ->{
+                dialog.dismiss();
+                Toast.makeText(getApplicationContext(), R.string.changePermissionInfo, Toast.LENGTH_SHORT).show();
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("onCreateKey",false);
             editor.apply();
-        }
     }
 
     @Override

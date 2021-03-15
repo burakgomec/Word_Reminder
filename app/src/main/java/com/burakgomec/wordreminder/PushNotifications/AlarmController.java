@@ -20,10 +20,8 @@ public class AlarmController {
     SharedPreferences sharedPreferences;
     String hour;
 
-
     public void setAlarm(Context context){
-        //Intent intent = new Intent(context, ReminderBroadcast.class);
-        //boolean isWorking =(PendingIntent.getBroadcast(context, 0, intent, 0) != null);
+
          sharedPreferences = context.getSharedPreferences("notification",MODE_PRIVATE);
          hour = sharedPreferences.getString("hour","19");
          createNotificationChannel(context);
@@ -34,13 +32,10 @@ public class AlarmController {
 
          Calendar calendar = Calendar.getInstance();
          calendar.setTimeInMillis(System.currentTimeMillis());
-         calendar.set(Calendar.HOUR_OF_DAY, 7);
-         calendar.set(Calendar.MINUTE,23);
-         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 20, pendingIntent);
-
-         //alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime(),2000,pendingIntent);
-         //alarmManager.set(AlarmManager.RTC_WAKEUP,15000,pendingIntent);
-        //alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
+         calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(hour));
+         calendar.set(Calendar.MINUTE,0);
+         calendar.set(Calendar.SECOND,0);
+         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
 
     }
 
@@ -61,8 +56,6 @@ public class AlarmController {
             notificationManager.createNotificationChannel(channel);
         }
     }
-
-
 
     private AlarmController(){ }
 

@@ -1,9 +1,11 @@
 package com.burakgomec.wordreminder.View;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 
 import com.burakgomec.wordreminder.PushNotifications.AlarmController;
+import com.burakgomec.wordreminder.PushNotifications.RebootReceiver;
 import com.burakgomec.wordreminder.R;
 import com.burakgomec.wordreminder.databinding.FragmentNotificationsBinding;
 import com.google.android.material.snackbar.Snackbar;
@@ -31,6 +34,9 @@ public class NotificationsFragment extends Fragment {
     Boolean choice;
     String hour;
     SharedPreferences.Editor editor;
+    ComponentName receiver;
+    PackageManager pm;
+
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,50 +51,66 @@ public class NotificationsFragment extends Fragment {
         choice = sharedPreferences.getBoolean("choice",true);
         hour = sharedPreferences.getString("hour","19");
         binding.switchButton.setChecked(choice);
-
-
-        binding.switchButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            editor = sharedPreferences.edit();
-            editor.putBoolean("choice", isChecked);
-            choice = isChecked;
-            editor.apply();
-            if(isChecked){
-                AlarmController.getInstance().setAlarm(getContext());
-            }
-            else{
-                AlarmController.getInstance().closeAlarm(getContext());
-            }
-        });
-
-
         binding.buttonTimeZone.setText(getString(R.string.changeTimeZone,hour));
-
-        binding.buttonTimeZone.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-            builder.setTitle(getString(R.string.buttonTimeZoneTitle,hour));
-            builder.setItems(R.array.hours, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if(!choice){
-                        Snackbar.make(v, R.string.pleaseChangeYourNotificationSetting, Snackbar.LENGTH_SHORT).show();
-                    }
-                    else{
-                        editor = sharedPreferences.edit();
-                        editor.putString("hour",String.valueOf(which));
-                        hour = String.valueOf(which);
-                        editor.apply();
-                        Toast.makeText(v.getContext(), R.string.savedTimeZoneSuccessful, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-            builder.setNegativeButton(R.string.exit, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) { dialog.dismiss(); }
-            });
-            AlertDialog alert = builder.create();
-            alert.show();
+        binding.switchButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            switchButtonChangeListener(isChecked,getView());
         });
 
-
+        binding.buttonTimeZone.setOnClickListener(this::timeZoneButtonClickListener);
     }
+
+
+    private void timeZoneButtonClickListener(View v){
+        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        builder.setTitle(getString(R.string.buttonTimeZoneTitle,hour));
+        builder.setItems(R.array.hours, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(!choice){
+                    Snackbar.make(v, R.string.pleaseChangeYourNotificationSetting, Snackbar.LENGTH_SHORT).show();
+                }
+                else{
+                    editor = sharedPreferences.edit();
+                    editor.putString("hour",String.valueOf(which));
+                    hour = String.valueOf(which);
+                    editor.apply();
+                    binding.buttonTimeZone.setText(getString(R.string.changeTimeZone,hour));
+                    Toast.makeText(v.getContext(), R.string.savedTimeZoneSuccessful, Toast.LENGTH_SHORT).show();
+                    AlarmController.getInstance().closeAlarm(v.getContext());
+                    AlarmController.getInstance().setAlarm(v.getContext());
+                }
+            }
+        });
+        builder.setNegativeButton(R.string.exit, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) { dialog.dismiss(); }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void switchButtonChangeListener(Boolean isChecked,View view){
+        editor = sharedPreferences.edit();
+        editor.putBoolean("choice", isChecked);
+        choice = isChecked;
+        editor.apply();
+        if(isChecked){
+            AlarmController.getInstance().setAlarm(view.getContext());
+            receiver = new ComponentName(view.getContext(), RebootReceiver.class);
+            pm = view.getContext().getPackageManager();
+            pm.setComponentEnabledSetting(receiver,
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                    PackageManager.DONT_KILL_APP);
+        }
+        else{
+            AlarmController.getInstance().closeAlarm(view.getContext());
+            receiver = new ComponentName(view.getContext(), RebootReceiver.class);
+            pm = view.getContext().getPackageManager();
+            pm.setComponentEnabledSetting(receiver,
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                    PackageManager.DONT_KILL_APP);
+        }
+    }
+
+
 }

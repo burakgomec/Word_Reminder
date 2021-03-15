@@ -3,17 +3,13 @@ package com.burakgomec.wordreminder.Model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.ContactsContract;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.burakgomec.wordreminder.R;
-
-import java.io.IOException;
 
 public class Database extends SQLiteOpenHelper {
 
@@ -43,7 +39,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase db){
         db.execSQL(SQL_CREATE_ENTRIES);
     }
 
@@ -60,7 +56,7 @@ public class Database extends SQLiteOpenHelper {
         contentValues.put(TablesInfo.WordEntry.COLUMN_NAME_SECOND_TRANSLATED_WORD,word2);
         long result = database.insert(TablesInfo.WordEntry.TABLE_NAME, null, contentValues);
         if(!(result > -1)){
-            Toast.makeText(context, R.string.sqlite_toast, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.sqlToastMessage, Toast.LENGTH_SHORT).show();
         }
         int size = DatabaseController.getInstance().getTranslatedWordArrayList().size()+1;
         translatedWord = new TranslatedWord(size,word1,word2);
@@ -82,7 +78,7 @@ public class Database extends SQLiteOpenHelper {
         database.close();
     }
 
-    public void deleteWordWithString(String word) throws SQLException {//çalışmıyor
+    public void deleteWordWithString(String word){
         database = this.getWritableDatabase();
         String selection = TablesInfo.WordEntry.COLUMN_NAME_SECOND_TRANSLATED_WORD + "=?";
         database.delete(TablesInfo.WordEntry.TABLE_NAME,selection,new String[]{word});

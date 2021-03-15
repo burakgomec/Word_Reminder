@@ -62,7 +62,7 @@ public class SettingsFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
         builder.setTitle(R.string.clearSavedTranslations);
         builder.setMessage(R.string.clearSavedTranslationsMessage);
-        builder.setPositiveButton(R.string.okey, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 database.deleteAllWords();

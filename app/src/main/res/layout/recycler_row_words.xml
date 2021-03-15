@@ -38,7 +38,8 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_baseline_star_rate_24"
                         android:padding="10dp"
-                        android:layout_weight="0.1"/>
+                        android:layout_weight="0.1"
+                        android:contentDescription="@string/removeStar" />
 
             </LinearLayout>
 

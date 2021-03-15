@@ -3,8 +3,8 @@
     android:opacity="opaque">
 
     <item android:drawable="@color/splash" />
-
-
-
-
+    <item>
+        <bitmap android:src="@drawable/splash"
+            android:gravity="center"/>
+    </item>
 </layer-list>

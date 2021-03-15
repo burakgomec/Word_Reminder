@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -39,8 +38,8 @@ import java.util.Objects;
 public class SearchFragment extends Fragment {
 
     FragmentSearchBinding binding;
-    String editString,langCode,langCode2,language1TextBuffer;
-    Boolean imageControl,saved;
+    String editString,langCode,langCode2,language1TextBuffer,bufferRecordedWord;
+    Boolean saved;
     ArrayList<String> bufferArrayLanguage2,alertDialogLanguage;
     String[] regexLanguage2;
     Integer index;
@@ -60,32 +59,20 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        sharedPreferences =  view.getContext().getSharedPreferences("languages",Context.MODE_PRIVATE);
+        setFirstViewFromSharedPref(view);
+        bufferArrayLanguage2 = new ArrayList<>(); alertDialogLanguage = new ArrayList<>();
 
-        binding.textViewLang1.setText(sharedPreferences.getString("Language1", getString(R.string.turkish)));
-        binding.textViewLang2.setText(sharedPreferences.getString("Language2",getString(R.string.english)));
-        binding.firstLanguageButton.setText(sharedPreferences.getString("Language1",getString(R.string.turkish)));
-        binding.secondLanguageButton.setText(sharedPreferences.getString("Language2",getString(R.string.english)));
-        langCode = sharedPreferences.getString("langCode1","tr");
-        langCode2 = sharedPreferences.getString("langCode2","en");
-
-        bufferArrayLanguage2 = new ArrayList<>(); alertDialogLanguage = new ArrayList<>(); imageControl = true;
-
-        setLanguageButton2();
+        setSecondLanguageCodes();
 
         binding.editTextSearch.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         binding.editTextSearch.setRawInputType(InputType.TYPE_CLASS_TEXT);
         binding.textViewResult.setMovementMethod(new ScrollingMovementMethod()); // scroll in text view
+
         database = new Database(view.getContext());
-
-        setLanguageClickListeners();
-        clearEditText();
-
         clipboardManager = (ClipboardManager) view.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
 
-
-        binding.imageViewStar.setOnClickListener(v -> setImageControl());
-        binding.changeLanguage.setOnClickListener(v -> setChangeLanguage());
+        binding.imageViewStar.setOnClickListener(v -> recordWordsToDb());
+        binding.changeLanguage.setOnClickListener(v -> changeLanguages());
 
         binding.editTextSearch.setOnEditorActionListener((v, actionId, event) -> {
             InputMethodManager inputManager = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -93,7 +80,7 @@ public class SearchFragment extends Fragment {
             binding.editTextSearch.clearFocus();
             saved = false;
             if(actionId == EditorInfo.IME_ACTION_SEARCH){
-                editTextControl();
+                searchWord();
                 return true;
             }
             return false;
@@ -105,26 +92,57 @@ public class SearchFragment extends Fragment {
             Snackbar.make(v, R.string.copied, Snackbar.LENGTH_SHORT).show();
             return true;
         });
+
+        binding.secondLanguageButton.setOnClickListener(this::secondLanguageButtonClickListener);
+
+        binding.firstLanguageButton.setOnClickListener(this::firstLanguageButtonClickListener);
+
+        binding.editTextSearch.setOnFocusChangeListener((v, hasFocus) -> clearEditText(hasFocus));
+
+        binding.clearEditText.setOnClickListener(v -> clearEditText());
+    }
+
+    private void clearEditText(){
+        binding.editTextSearch.setText("");
+        binding.textViewResult.setText("");
+        binding.imageViewStar.setImageResource(R.drawable.ic_baseline_star_border_24);
+        binding.imageViewStar.setTag("null");
+    }
+
+
+    private void setFirstViewFromSharedPref(View view){
+        sharedPreferences =  view.getContext().getSharedPreferences("languages",Context.MODE_PRIVATE);
+        binding.textViewLang1.setText(sharedPreferences.getString("Language1", getString(R.string.turkish)));
+        binding.textViewLang2.setText(sharedPreferences.getString("Language2",getString(R.string.english)));
+        binding.firstLanguageButton.setText(sharedPreferences.getString("Language1",getString(R.string.turkish)));
+        binding.secondLanguageButton.setText(sharedPreferences.getString("Language2",getString(R.string.english)));
+        langCode = sharedPreferences.getString("langCode1","tr");
+        langCode2 = sharedPreferences.getString("langCode2","en");
     }
 
 
 
+    private void checkWordFromDb(String editString){
+        //Linear search in array list. O(N) time complexity
+        for(TranslatedWord translatedWord : DatabaseController.getInstance().getTranslatedWordArrayList()){
+            if(editString.equals(translatedWord.getFirstWord())){
+                binding.imageViewStar.setImageResource(R.drawable.ic_baseline_star_rate_24);
+                binding.imageViewStar.setTag("!null");
+                binding.textViewResult.setText(translatedWord.getSecondWord());
+                saved = true;
+                break; } }
+    }
 
-    private void editTextControl(){
+
+
+    private void searchWord(){
         editString = binding.editTextSearch.getText().toString();
         if((!editString.equals("")) && (!binding.secondLanguageButton.getText().equals(getString(R.string.choose_a_language)))){
-            //Linear search in array list. O(N) time complexity
-            for(TranslatedWord translatedWord : DatabaseController.getInstance().getTranslatedWordArrayList()){
-                if(editString.equals(translatedWord.getFirstWord())){
-                    binding.imageViewStar.setImageResource(R.drawable.ic_baseline_star_rate_24);
-                    imageControl = false;
-                    binding.textViewResult.setText(translatedWord.getSecondWord());
-                    saved = true;
-                    break; } }
+            checkWordFromDb(editString);
             if(!saved){
+                binding.imageViewStar.setTag("null");
                 binding.imageViewStar.setImageResource(R.drawable.ic_baseline_star_border_24);
-                imageControl = true;
-                Connection.getInstance().getWord(editString,langCode,langCode2,getActivity(), binding.textViewResult);
+                Connection.getInstance().getWord(editString,langCode,langCode2,getActivity(), binding.textViewResult,getView());
             }
         }
         else if(binding.secondLanguageButton.getText().equals(getString(R.string.choose_a_language))){
@@ -135,7 +153,7 @@ public class SearchFragment extends Fragment {
         }
     }
 
-    private void setChangeLanguage(){
+    private void changeLanguages(){
         if(!binding.secondLanguageButton.getText().equals(getString(R.string.choose_a_language))){
             //View
             language1TextBuffer = binding.firstLanguageButton.getText().toString();
@@ -148,50 +166,73 @@ public class SearchFragment extends Fragment {
             language1TextBuffer = langCode;
             langCode = langCode2;
             langCode2 = language1TextBuffer;
-
             editString = binding.textViewResult.getText().toString();
-            if(!editString.equals("")){
-                Connection.getInstance().getWord(editString,langCode,langCode2,getActivity(), binding.textViewResult);
-                binding.editTextSearch.setText(editString);
-            }
-            setLanguageButton2();
-        }
 
+            if(!editString.trim().equals("")){
+               if(binding.imageViewStar.getTag().equals("!null")){
+                   binding.imageViewStar.setImageResource(R.drawable.ic_baseline_star_border_24);
+                   binding.imageViewStar.setTag("null");
+                   bufferRecordedWord = binding.editTextSearch.getText().toString();
+               }
+               Connection.getInstance().getWord(editString,langCode,langCode2,getActivity(), binding.textViewResult,getView());
+               binding.editTextSearch.setText(editString);
+               if(editString.equals(bufferRecordedWord)) {
+                   binding.imageViewStar.setImageResource(R.drawable.ic_baseline_star_rate_24);
+                   binding.imageViewStar.setTag("!null");
+                   bufferRecordedWord = editString;
+               }
+            }
+            setSecondLanguageCodes();
+        }
     }
 
 
-    private void setImageControl(){
+
+
+    private void recordWordsToDb(){
         if(!binding.textViewResult.getText().toString().equals("")){
-            if(imageControl){
+            if(binding.imageViewStar.getTag().equals("null")){
                 binding.imageViewStar.setImageResource(R.drawable.ic_baseline_star_rate_24);
+                binding.imageViewStar.setTag("!null");
                 database.saveWords(binding.editTextSearch.getText().toString(),binding.textViewResult.getText().toString());
-                imageControl = false;
             }
             else{
-                imageControl = true;
                 binding.imageViewStar.setImageResource(R.drawable.ic_baseline_star_border_24);
+                binding.imageViewStar.setTag("null");
                 database.deleteWordWithString(binding.textViewResult.getText().toString());
             }
         }
     }
 
-
-    private void clearEditText(){
-        binding.editTextSearch.setOnFocusChangeListener((v, hasFocus) -> {
-            if(hasFocus){
-                binding.clearEditText.setVisibility(View.VISIBLE);
-            }
-            else{
-                binding.clearEditText.setVisibility(View.INVISIBLE);
-            }
-        });
-        binding.clearEditText.setOnClickListener(v -> binding.editTextSearch.setText(""));
+    private void clearEditText(Boolean hasFocus){
+       if(hasFocus){
+           binding.clearEditText.setVisibility(View.VISIBLE);
+       }
+       else{
+           binding.clearEditText.setVisibility(View.INVISIBLE);
+       }
     }
 
+    private void firstLanguageButtonClickListener(View v){
+        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        builder.setTitle(getString(R.string.choose_a_language));
+        builder.setItems(R.array.languages, (dialog, which) -> {
+            binding.firstLanguageButton.setText(Connection.getInstance().languages.get(which));
+            binding.textViewLang1.setText(Connection.getInstance().languages.get(which));
+            binding.secondLanguageButton.setText(getString(R.string.choose_a_language));
+            langCode = Connection.getInstance().languagesCode.get(which);
+            setSecondLanguageCodes();
+            binding.textViewResult.setText("");
+            binding.imageViewStar.setTag("null");
+            binding.imageViewStar.setImageResource(R.drawable.ic_baseline_star_border_24);
+            binding.textViewLang2.setText(getString(R.string.choose_a_language));
+        });
+        builder.setNegativeButton(R.string.exit, (dialog, which) -> dialog.dismiss());
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
-
-    private void setLanguageClickListeners(){
-        binding.secondLanguageButton.setOnClickListener(v -> {
+    private void secondLanguageButtonClickListener(View v){
                 alertDialogLanguage.clear();
                 if(bufferArrayLanguage2.size() == 1){
                     index = Connection.getInstance().languagesCode.indexOf(bufferArrayLanguage2.get(0));
@@ -211,34 +252,20 @@ public class SearchFragment extends Fragment {
                 index = Connection.getInstance().languages.indexOf(alertDialogLanguage.get(which));
                 langCode2 = Connection.getInstance().languagesCode.get(index);
                 editString = binding.editTextSearch.getText().toString();
-                if(!editString.equals("")){
-                    Connection.getInstance().getWord(editString,langCode,langCode2,getActivity(), binding.textViewResult);
+                if(!editString.trim().equals("")){
+                    Connection.getInstance().getWord(editString,langCode,langCode2,getActivity(), binding.textViewResult,getView());
+                }
+                if(binding.imageViewStar.getTag().equals("!null")){
+                    binding.imageViewStar.setImageResource(R.drawable.ic_baseline_star_border_24);
+                    binding.imageViewStar.setTag("null");
                 }
             });
             builder.setNegativeButton(getString(R.string.exit), (dialog, which) -> dialog.dismiss());
             AlertDialog alert = builder.create();
             alert.show();
-        });
-
-
-        binding.firstLanguageButton.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-            builder.setTitle(getString(R.string.choose_a_language));
-            builder.setItems(R.array.languages, (dialog, which) -> {
-                binding.firstLanguageButton.setText(Connection.getInstance().languages.get(which));
-                binding.textViewLang1.setText(Connection.getInstance().languages.get(which));
-                binding.secondLanguageButton.setText(getString(R.string.choose_a_language));
-                langCode = Connection.getInstance().languagesCode.get(which);
-                setLanguageButton2();
-            });
-            builder.setNegativeButton(R.string.exit, (dialog, which) -> dialog.dismiss());
-            AlertDialog alert = builder.create();
-            alert.show();
-        });
-
     }
 
-    private void setLanguageButton2(){
+    private void setSecondLanguageCodes(){
         bufferArrayLanguage2.clear();
         if(!(langCode.equals("en") || langCode.equals("de") || langCode.equals("es") || langCode.equals("it") || langCode.equals("fr"))){
             bufferArrayLanguage2.add(Connection.getInstance().modals.get(langCode));

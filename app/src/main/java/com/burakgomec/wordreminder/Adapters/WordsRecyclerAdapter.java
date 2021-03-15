@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 public class WordsRecyclerAdapter extends RecyclerView.Adapter<WordsRecyclerAdapter.ViewHolder> {
 
-
     Context context;
     ArrayList<TranslatedWord> translatedWordArrayList;
     Database database;
