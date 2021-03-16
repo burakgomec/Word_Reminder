@@ -2,15 +2,19 @@ package com.burakgomec.wordreminder;
 
 import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Toast;
 
 import com.burakgomec.wordreminder.Model.Database;
+import com.burakgomec.wordreminder.Model.DatabaseController;
 import com.burakgomec.wordreminder.PushNotifications.AlarmController;
 import com.burakgomec.wordreminder.PushNotifications.RebootReceiver;
+import com.burakgomec.wordreminder.View.NotificationsFragment;
 import com.burakgomec.wordreminder.databinding.ActivityMainBinding;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
         database = new Database(this);
         database.getWords();
-
         sharedPreferences = getSharedPreferences("notification",MODE_PRIVATE);
         if(sharedPreferences.getBoolean("onCreateKey",true)){
             checkPushNotificationPermission();
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void checkPushNotificationPermission(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.permissionTitle);
             builder.setPositiveButton(R.string.permissionY, (dialog, which) -> {
@@ -67,14 +71,16 @@ public class MainActivity extends AppCompatActivity {
                 pm.setComponentEnabledSetting(receiver,
                         PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                         PackageManager.DONT_KILL_APP);
+                DatabaseController.getInstance().userPermissionCheck = true;
             });
             builder.setNegativeButton(R.string.permissionN, (dialog, which) ->{
+                DatabaseController.getInstance().userPermissionCheck = false;
                 dialog.dismiss();
                 Toast.makeText(getApplicationContext(), R.string.changePermissionInfo, Toast.LENGTH_SHORT).show();
             });
+            builder.setCancelable(false);
             AlertDialog alert = builder.create();
             alert.show();
-            SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("onCreateKey",false);
             editor.apply();
     }

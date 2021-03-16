@@ -15,7 +15,7 @@
     <string name="github_link">https://github.com/BurakGomec/Word_Reminder</string>
     <string name="infoTextView">Bilgilendirme</string>
     <string name="sqlToastMessage">Kelime kayıt edilirken bir hata meydana geldi</string>
-    <string name="info">Bu uygulama açık kaynak kodlu olarak geliştirilmiştir.\n\nUygulamada IBM Language Translator servisinin ücretsiz planı kullanılmıştır. Bu yüzden çeviri hizmeti ayda toplam 1,000,000 karakter ve sunucuya atılan istek sayısına göre IBM tarafından sınırlandırılmıştır.\n\nAşağıda verilen link üzerinden uygulamanın tüm kaynak kodlarına ulaşabilirsiniz.\n\nUygulamaya Github ve Google Play üzerinden yıldız vererek destekleyebilir, öneriler sunabilirsiniz.\n\nIcons made by www.freepik.com"\n\nGeliştirici: Burak GÖMEÇ
+    <string name="info">Bu uygulama açık kaynak kodlu olarak geliştirilmiştir.\n\nUygulamada IBM Watson Language Translator servisinin ücretsiz planı kullanılmıştır. Bu yüzden çeviri hizmeti ayda toplam 1,000,000 karakter ve sunucuya atılan istek sayısına göre IBM tarafından sınırlandırılmıştır.\n\nAşağıda verilen link üzerinden uygulamanın tüm kaynak kodlarına ulaşabilirsiniz.\n\nUygulamaya Github ve Google Play üzerinden yıldız vererek destekleyebilir, öneriler sunabilirsiniz.\n\nIcons made by www.freepik.com"\n\nOur preview images were created using 'Previewed' at previewed.app\n\nGeliştirici: Burak GÖMEÇ
     </string>
     <string name="copied">Kopyalandı</string>
     <string name="exit">Çıkış</string>
