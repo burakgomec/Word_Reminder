@@ -7,6 +7,7 @@ public class DatabaseController { //Singleton Design Pattern
 
     private static DatabaseController databaseController;
     private final ArrayList<TranslatedWord> translatedWordArrayList;
+    public Boolean userPermissionCheck;
 
     public static  DatabaseController getInstance(){
         if(databaseController == null){

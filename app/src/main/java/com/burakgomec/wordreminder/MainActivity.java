@@ -2,11 +2,9 @@ package com.burakgomec.wordreminder;
 
 import android.app.AlertDialog;
 import android.content.ComponentName;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,7 +12,6 @@ import com.burakgomec.wordreminder.Model.Database;
 import com.burakgomec.wordreminder.Model.DatabaseController;
 import com.burakgomec.wordreminder.PushNotifications.AlarmController;
 import com.burakgomec.wordreminder.PushNotifications.RebootReceiver;
-import com.burakgomec.wordreminder.View.NotificationsFragment;
 import com.burakgomec.wordreminder.databinding.ActivityMainBinding;
 
 import androidx.appcompat.app.AppCompatActivity;
