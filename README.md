@@ -24,6 +24,3 @@ https://play.google.com/store/apps/details?id=com.burakgomec.wordreminder
 <a href="url"><img src="https://github.com/BurakGomec/Word_Reminder/blob/main/ss1.png" width="300" align="left"></a>
 <a href="url"><img src="https://github.com/BurakGomec/Word_Reminder/blob/main/ss2.png" width="300" align="center"></a>
 <a href="url"><img src="https://github.com/BurakGomec/Word_Reminder/blob/main/ss3.png" width="300" align="right"></a>
-
-
-
